@@ -3,11 +3,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { mainModule } = require('process');
 
 var app = express();
+const mongoUrl = 'mongodb+srv://sumansur98:sumansur98@myatlasclusteredu.yrxkven.mongodb.net/Inventory?retryWrites=true&w=majority&appName=myAtlasClusterEDU'
+connect().catch(err => console.log(err));
+console.log('connected');
+
+
+async function connect(){
+  await mongoose.connect(mongoUrl);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
